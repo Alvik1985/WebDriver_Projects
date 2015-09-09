@@ -54,3 +54,9 @@ Then /^I click Check Out Now$/ do
   element = $driver.find_element :xpath => "//a[@class='variant-add-to-cart']"
   element.click
 end
+
+Then /^I set value for ([^"]*) to ([^"]*)$/ do |x,y|
+  element = $driver.find_element :xpath => "#{x}"
+  element.clear()
+  element.send_keys "#{y}"
+  end
