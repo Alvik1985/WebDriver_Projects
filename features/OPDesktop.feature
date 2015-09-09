@@ -17,3 +17,9 @@ Feature: Core Smoke test for Opticsplanet desktop site
     Then I change qty to 1
     And I wait for element //span[@class='cart-items-popup-button-header'] to appear and contain 1
     Then I click Check Out Now
+    Then I set value for //input[@id='op_order_checkout_email'] to email
+    And I wait for element //select[@id='shipping-country']/option[1] to appear and contain United States
+    And I set value for //input[@id='op_order_checkout_shippingAddress_firstName'] to Alex
+    And I set value for //input[@id='op_order_checkout_shippingAddress_lastName'] to Khroniuk
+    And I set value for //input[@id='op_order_checkout_shippingAddress_addressOne'] to 1112 Castilian Ct
+

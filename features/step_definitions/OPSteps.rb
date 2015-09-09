@@ -1,5 +1,18 @@
 $basicurl = "https://www.opticsplanet.com"
 
+def user_data
+  user_data = CSV.read Dir.pwd + '/user_data.csv'
+  descriptor = user_data.shift
+  descriptor = descriptor.map { |key| key.to_sym }
+  user_data.map { |user| Hash[ descriptor.zip(user) ] }
+end
+
+def notification_text
+  wait = Selenium::WebDriver::Wait.new(timeout: 5)
+  wait.until { @driver.find_element(class: 'flash').displayed? }
+  @driver.find_element(class: 'flash').text.delete('^a-zA-z !.')
+end
+
 Given /^Open homepage$/ do
   $driver.get "https://www.opticsplanet.com"
 end
@@ -54,3 +67,9 @@ Then /^I click Check Out Now$/ do
   element = $driver.find_element :xpath => "//a[@class='variant-add-to-cart']"
   element.click
 end
+
+Then /^I set value for ([^"]*) to ([^"]*)$/ do |x,y|
+  element = $driver.find_element :xpath => "#{x}"
+  element.clear()
+  element.send_keys user[:"#{y}"]
+  end

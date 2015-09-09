@@ -5,7 +5,7 @@ require 'cucumber'
 $driver = Selenium::WebDriver.for :firefox
 
 Before do
-  $driver.get  $basicurl
+  $driver.get $basicurl
   # $driver.manage.window.maximize
 end
 
